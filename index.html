@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Jiggo</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  color: #fff5e9;
+  text-align: center;
+  background: #08091b;
+}
+
+.screen {
+  display: none;
+  min-height: 100vh;
+  padding: 30px 18px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background:
+    radial-gradient(ellipse at top, #33265e, #111329 55%, #08091b);
+}
+
+.screen.active { display: flex; }
+
+h1 {
+  color: #ffcfac;
+  font-size: 2rem;
+}
+
+p {
+  line-height: 1.8;
+  max-width: 550px;
+}
+
+button {
+  background: #8B0000;
+  color: white;
+  border: 1px solid #d98b8b;
+  padding: 12px 18px;
+  margin: 7px;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.penguin { font-size: 4rem; }
+.door { font-size: 3rem; }
+.feedback { color: #ffcfac; min-height: 25px; }
+
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.memory-card {
+  padding: 14px;
+  background: #1a1930;
+  border: 1px solid #665078;
+  border-radius: 16px;
+}
+
+.memory-card img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.memory-card h2 {
+  color: #ffcfac;
+  font-size: 1.25rem;
+}
+
+.memory-card p {
+  margin: 10px auto;
+}
+
+.note {
+  border-left: 3px solid #8B0000;
+  padding: 12px;
+  background: #1a1930;
+  border-radius: 8px;
+}
+
+.small { font-size: .9rem; color: #d8cce8; }
+</style>
+</head>
+
+<body>
+
+<!-- FIRST SCREEN -->
+<section class="screen active" id="welcome">
+  <p>✦　˚　✧　⋆　✦　˚　✧</p>
+  <h1>Heyyyyy Jiggo!</h1>
+
+  <div class="penguin">🐧🌼</div>
+  <div class="door">🚪🔒</div>
+
+  <p>Someone has a tiny surprise for you.</p>
+  <p>Do you want to open this door? 👀</p>
+
+  <button onclick="showScreen('password')">
+    Obviously, yes!
+  </button>
+</section>
+
+<!-- PASSWORD SCREEN -->
+<section class="screen" id="password">
+  <h1>One little question...</h1>
+  <p>Which outfit was I wearing? Think properly! 👀</p>
+
+  <button onclick="checkAnswer('A')">A. Red top</button>
+  <button onclick="checkAnswer('B')">B. Yellow Brazil top</button>
+  <button onclick="checkAnswer('C')">C. Brown kurti</button>
+  <button onclick="checkAnswer('D')">D. Lavender tube top</button>
+
+  <p class="feedback" id="feedback"></p>
+  <button onclick="showScreen('welcome')">Go back</button>
+</section>
+
+<!-- SEVEN PICTURES -->
+<section class="screen" id="gallery">
+  <h1>You got it, Jiggo!</h1>
+  <p>The door is open! 🔓</p>
+  <p>Seven random things that somehow made me think of you. Don't let this get to your head. 🙄</p>
+
+  <div class="gallery">
+
+    <div class="memory-card">
+      <img src="shower _page-0001.jpg" alt="Starry night sky">
+      <h2>01 — The starry sky</h2>
+      <p>This reminds me of you because whenever I look at the sky, I end up thinking about random things… and somehow, you're one of those thoughts. Maybe that's what happens when someone quietly becomes special.</p>
+    </div>
+
+    <div class="memory-card">
+      <img src="my little star_page-0001.jpg" alt="Little starfish">
+      <h2>02 — The little starfish</h2>
+      <p>Pata nahi kyun, but this little starfish reminds me of you 😭 Maybe because now even the most random things make me go, “Wait, this reminds me of my Jiggo.”</p>
+    </div>
+
+    <div class="memory-card">
+      <img src="ocean _page-0001.jpg" alt="Ocean waves">
+      <h2>03 — The ocean</h2>
+      <p>The ocean feels peaceful to me, and talking to you can feel like that too. Even when we're just talking nonsense, somehow my mind feels a little lighter.</p>
+    </div>
+
+    <div class="memory-card">
+      <img src="ab_page-0001.jpg" alt="Sunset">
+      <h2>04 — The sunset</h2>
+      <p>Sunsets make me think about the people I quietly wish good things for. And obviously, you're one of them… meri 11:11 wishes mein bhi toh tum hote ho.</p>
+    </div>
+
+    <div class="memory-card">
+      <img src="my cute meme _page-0001.jpg" alt="Cute little animal">
+      <h2>05 — This little cutie</h2>
+      <p>It's tiny, cute, and a little silly… kinda like the way you make me smile without even trying 😭 I can't explain it properly, bas it gives me your vibe.</p>
+    </div>
+
+    <div class="memory-card">
+      <img src="sunflower _page-0001.jpg" alt="Sunflower">
+      <h2>06 — The sunflower</h2>
+      <p>This reminds me of the way I wish life treats you. I hope you always find a little sunshine, even on your rough days, and never forget how much good you deserve. 🌻</p>
+    </div>
+
+    <div class="memory-card">
+      <img src="beast boy _page-0001.jpg" alt="Beast Boy">
+      <h2>07 — Beast Boy energy</h2>
+      <p>I genuinely have no logical explanation for this one 😭 I saw it and thought of you, so now you'll have to accept that this is your official cartoon energy. Don't argue with me. 🙄</p>
+    </div>
+
+  </div>
+
+  <p>Okay, enough embarrassing you for now. There's one more thing.</p>
+  <button onclick="showScreen('sorry')">One last thing →</button>
+</section>
+
+
+<!-- FULL MESSAGE -->
+<section class="screen" id="sorry">
+  <h1>Okay, Jiggo. Read this properly. 🙄</h1>
+
+  <p>
+    Heyyy, my Jiggo!
+  </p>
+
+  <p>
+    Pata nahi main tumhe ye sab directly kabhi bol paungi ya nahi,
+    isliye socha yahan likh deti hoon. And before you start smiling
+    like an idiot, haan, ye sab tumhare liye hi hai. Don't get too
+    excited, okay? 😭
+  </p>
+
+  <p>
+    Honestly, mujhe nahi pata exactly kab tum mere liye itne
+    important ban gaye. Koi particular moment yaad nahi hai.
+    Maybe it was our random conversations, hamari stupid si baatein,
+    ek dusre ko irritate karna, flirting karna, aur phir act karna
+    jaise kuch hua hi nahi.
+  </p>
+
+  <p>
+    Maybe talking to you slowly became something I started looking
+    forward to. Ab kabhi-kabhi main khud sochti hoon, bhai, ye kab
+    hua? 😭
+  </p>
+
+  <p>
+    I do have a little crush on you, obviously. But please apne
+    dimaag mein koi movie mat chala lena. 🙄 I'm not trying to make
+    this into some dramatic love story. I just know that you're
+    important to me, I care about you, and I genuinely enjoy
+    talking to you.
+  </p>
+
+  <p>
+    Tumhare saath random si baatein bhi interesting lagti hain.
+    Kabhi-kabhi kisi particular topic ki bhi zarurat nahi hoti.
+    Bas baat karna achha lagta hai.
+  </p>
+
+  <p>
+    And honestly, one thing I appreciate about you is how you notice
+    little things about me. Kabhi meri baaton mein, kabhi mere
+    reactions mein, kabhi aisi cheezon mein jo main khud bhi notice
+    nahi karti.
+  </p>
+
+  <p>
+    Har koi tumse baat kar sakta hai, but not everyone actually
+    pays attention. And I think it's really nice when someone
+    notices those little things without you having to explain
+    everything. Maybe tumhare liye ye normal hai, but I do
+    appreciate it.
+  </p>
+
+  <p>
+    Aur haan, tum meri 11:11 wishes mein bhi aate ho. 😭
+    Haan, has lo. But seriously, I genuinely wish good things for
+    you. I hope you're happy, your dreams come true, life treats
+    you kindly, and you always find reasons to smile, even on
+    difficult days.
+  </p>
+
+  <p>
+    Main ye sab isliye nahi bol rahi ki tumhe kuch return mein
+    bolna pade. I just want good things for you because you matter
+    to me. Bas itna hi.
+  </p>
+
+  <h2 style="color:#ffcfac">And now, the serious part.</h2>
+
+  <p>
+    Jiggo, I'm genuinely sorry for blocking you yesterday.
+    I could've handled things differently instead of suddenly
+    doing that.
+  </p>
+
+  <p>
+    I don't know exactly how you felt, but I don't want my actions
+    to make you think that you don't matter to me. Because you do.
+    You're important to me, and I really didn't want to hurt you.
+  </p>
+
+  <p>
+    I'm not making excuses for what I did. I should've communicated
+    better, and I'm sorry if I made you feel unwanted or confused.
+    You didn't deserve to be left wondering what happened.
+  </p>
+
+  <p>
+    I know saying sorry won't automatically make everything normal,
+    and I'm not expecting you to forget it immediately. I just
+    wanted to apologise properly and let you know that I'll try
+    to communicate better next time instead of reacting like that.
+  </p>
+
+  <p>
+    I can't change what happened yesterday, but I can learn from
+    it. And I genuinely don't want to repeat that mistake.
+  </p>
+
+  <p>
+    You're not just someone I flirt with. You're someone I enjoy
+    talking to, someone I appreciate, and someone whose happiness
+    I genuinely wish for. There's a difference.
+  </p>
+
+  <p>
+    I'm glad we got to know each other. I'm glad we have our
+    random conversations, our stupid jokes, and all the little
+    moments that probably wouldn't make sense to anyone else. 😭
+  </p>
+
+  <p>
+    I don't know what place I have in your life, and I'm not
+    expecting you to give me some big emotional answer after
+    reading this. I just wanted you to know that I appreciate
+    having you around.
+  </p>
+
+  <p>
+    And don't think this means you're allowed to become even
+    more annoying. You're already doing an excellent job at that.
+    🙄
+  </p>
+
+  <p>
+    So, my Jiggo, I'm sorry for yesterday. Dil se.
+    I hope we can make more silly, happy memories and that I can
+    show you through my actions that I mean what I'm saying.
+  </p>
+
+  <p>
+    Take care of yourself, okay? Khush rehna, apne dreams ke peeche
+    jaana, and don't forget to look after yourself too.
+  </p>
+
+  <h2 style="color:#ffcfac">
+    Happy 11:11, Jiggo. ✨
+  </h2>
+
+  <p>
+    Here's to good things for you, more random conversations,
+    and me continuing to bully you whenever you deserve it.
+    Which, let's be honest, will probably be quite often. 😭
+  </p>
+
+  <button onclick="showScreen('ending')">
+    Okay, enough emotions now →
+  </button>
+</section>
+  
+<!-- FINAL SCREEN -->
+<section class="screen" id="ending">
+  <p>✦　˚　✧　⋆　✦　˚　✧</p>
+  <h1>That's all, Jiggo!</h1>
+
+  <div class="penguin">🐧🌼</div>
+
+  <p>You're annoying, sometimes impossible to understand, and unfortunately quite fun to talk to. Don't let this website inflate your ego. 🙄</p>
+
+  <p>Take care of yourself, okay? I hope life is kind to you and gives you plenty of reasons to smile.</p>
+
+  <h2 style="color:#ffcfac">— Your little crush, maybe. 👀</h2>
+
+  <p class="small">Made with a little effort and a lot of overthinking.</p>
+
+  <button onclick="showScreen('welcome')">Read it again ↺</button>
+</section>
+
+<script>
+function showScreen(screenId) {
+  document.querySelectorAll('.screen').forEach(function(screen) {
+    screen.classList.remove('active');
+  });
+
+  document.getElementById(screenId).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function checkAnswer(answer) {
+  if (answer === 'C') {
+    document.getElementById('feedback').textContent = '';
+    showScreen('gallery');
+  } else {
+    document.getElementById('feedback').textContent =
+      'Wrong answer, Jiggo! 😭 Try again!';
+  }
+}
+</script>
+
+</body>
+  </html>
+  
