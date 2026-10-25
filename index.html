@@ -1,385 +1,559 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Jiggo</title>
+<title>A Little Surprise for Jiggo</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+:root {
+  --bg: #fbf8ff;
+  --lav: #e9ddff;
+  --purple: #8d75c7;
+  --dark: #5b477d;
+  --text: #665b77;
+  --border: #e8dff5;
+}
+
 * { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: Georgia, serif;
-  color: #fff5e9;
-  text-align: center;
-  background: #08091b;
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
+
+button { font: inherit; cursor: pointer; }
 
 .screen {
   display: none;
   min-height: 100vh;
-  padding: 30px 18px;
+  padding: 28px 16px;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  background:
-    radial-gradient(ellipse at top, #33265e, #111329 55%, #08091b);
 }
 
 .screen.active { display: flex; }
 
+.container {
+  width: 100%;
+  max-width: 760px;
+  margin: auto;
+  text-align: center;
+}
+
+.eyebrow {
+  color: var(--purple);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  color: var(--dark);
+  font-weight: 500;
+}
+
 h1 {
-  color: #ffcfac;
-  font-size: 2rem;
+  font-size: clamp(34px, 8vw, 56px);
+  line-height: 1.18;
+  margin: 15px 0;
 }
 
-p {
-  line-height: 1.8;
-  max-width: 550px;
+h2 { font-size: clamp(27px, 6vw, 40px); }
+p { line-height: 1.85; }
+
+.subtitle {
+  max-width: 480px;
+  margin: 0 auto 24px;
 }
 
-button {
-  background: #8B0000;
+.card, .letter-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 26px;
+  padding: clamp(22px, 5vw, 38px);
+  box-shadow: 0 14px 45px #6f539d14;
+}
+
+.art {
+  width: min(100%, 330px);
+  margin: 0 auto 16px;
+  padding: 20px;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #f2eaff, #fff8fd);
+  font-size: 76px;
+}
+
+.door {
+  display: block;
+  margin: 14px auto 0;
+  font-size: 50px;
+}
+
+.primary, .secondary {
+  border: 0;
+  border-radius: 999px;
+  padding: 13px 25px;
+  margin: 7px 4px;
+  font-weight: 800;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.primary {
   color: white;
-  border: 1px solid #d98b8b;
-  padding: 12px 18px;
-  margin: 7px;
-  border-radius: 12px;
-  font-size: 1rem;
-  cursor: pointer;
+  background: var(--purple);
+  box-shadow: 0 6px 18px #8d75c733;
 }
 
-.penguin { font-size: 4rem; }
-.door { font-size: 3rem; }
-.feedback { color: #ffcfac; min-height: 25px; }
+.secondary {
+  background: var(--lav);
+  color: var(--dark);
+}
+
+button:hover { transform: translateY(-2px); }
+
+button:focus-visible {
+  outline: 3px solid #bca8ec;
+  outline-offset: 3px;
+}
+
+.question {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--dark);
+}
+
+.options {
+  display: grid;
+  gap: 11px;
+  margin: 22px 0;
+  text-align: left;
+}
+
+.option {
+  width: 100%;
+  padding: 15px 17px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: white;
+  color: var(--text);
+  text-align: left;
+}
+
+.option:hover { background: #f5efff; }
+.option:disabled { cursor: default; opacity: .7; }
+
+#quizFeedback {
+  min-height: 28px;
+  font-weight: 800;
+  color: var(--purple);
+}
+
+.big-number {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(45px, 11vw, 82px);
+  color: var(--purple);
+  line-height: 1.1;
+  margin: 22px 0;
+}
+
+.gallery-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.gallery-intro {
+  max-width: 780px;
+  margin: 0 auto 35px;
+  padding: 15px 8px;
+  text-align: center;
+}
+
+.gallery-intro h1 {
+  font-size: clamp(29px, 7vw, 51px);
+  line-height: 1.2;
+  color: var(--purple);
+}
+
+.gallery-intro p {
+  max-width: 620px;
+  margin: 18px auto;
+  font-size: 17px;
+}
+
+.gallery-intro span {
+  display: block;
+  color: #a08cc7;
+  font-size: 13px;
+  letter-spacing: .5px;
+}
 
 .gallery {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 22px;
-  width: 100%;
-  max-width: 500px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
 }
 
 .memory-card {
-  padding: 14px;
-  background: #1a1930;
-  border: 1px solid #665078;
-  border-radius: 16px;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: white;
+  text-align: left;
+  box-shadow: 0 8px 25px #6f539d10;
 }
 
 .memory-card img {
+  display: block;
   width: 100%;
-  max-height: 300px;
-  object-fit: contain;
-  border-radius: 10px;
+  height: 220px;
+  object-fit: cover;
+  background: var(--lav);
 }
 
-.memory-card h2 {
-  color: #ffcfac;
-  font-size: 1.25rem;
+.memory-content { padding: 16px; }
+
+.memory-content h3 {
+  margin: 0 0 8px;
+  font-size: 22px;
 }
 
-.memory-card p {
-  margin: 10px auto;
+.memory-content p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.8;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
 }
 
-.note {
-  border-left: 3px solid #8B0000;
-  padding: 12px;
-  background: #1a1930;
-  border-radius: 8px;
+.letter-container {
+  width: 100%;
+  max-width: 760px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
 }
 
-.small { font-size: .9rem; color: #d8cce8; }
+.letter-card {
+  max-width: 700px;
+  width: 100%;
+}
+
+.letter-card h1 {
+  font-family: 'Playfair Display', serif;
+  color: var(--purple);
+  font-size: clamp(30px, 7vw, 44px);
+  line-height: 1.25;
+  margin: 0 0 20px;
+}
+
+.letter-text {
+  max-height: 52vh;
+  overflow-y: auto;
+  padding-right: 8px;
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.95;
+}
+
+.letter-text p { margin: 0 0 17px; }
+
+.letter-buttons {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.ending-container {
+  width: 100%;
+  max-width: 650px;
+  margin: auto;
+  text-align: center;
+  background: linear-gradient(145deg, white, #f3ebff);
+  border: 1px solid var(--border);
+  border-radius: 26px;
+  padding: clamp(24px, 5vw, 40px);
+  box-shadow: 0 14px 45px #6f539d14;
+}
+
+@media (max-width: 600px) {
+  .gallery { grid-template-columns: 1fr; }
+  .memory-card img { height: 240px; }
+  .letter-text { max-height: 55vh; font-size: 15px; }
+  .screen { padding: 20px 13px; }
+  .letter-buttons { justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  button { transition: none; }
+}
 </style>
 </head>
 
 <body>
 
-<!-- FIRST SCREEN -->
 <section class="screen active" id="welcome">
-  <p>✦　˚　✧　⋆　✦　˚　✧</p>
-  <h1>Heyyyyy Jiggo!</h1>
-
-  <div class="penguin">🐧🌼</div>
-  <div class="door">🚪🔒</div>
-
-  <p>Someone has a tiny surprise for you.</p>
-  <p>Do you want to open this door? 👀</p>
-
-  <button onclick="showScreen('password')">
-    Obviously, yes!
-  </button>
-</section>
-
-<!-- PASSWORD SCREEN -->
-<section class="screen" id="password">
-  <h1>One little question...</h1>
-  <p>Which outfit was I wearing? Think properly! 👀</p>
-
-  <button onclick="checkAnswer('A')">A. Red top</button>
-  <button onclick="checkAnswer('B')">B. Yellow Brazil top</button>
-  <button onclick="checkAnswer('C')">C. Brown kurti</button>
-  <button onclick="checkAnswer('D')">D. Lavender tube top</button>
-
-  <p class="feedback" id="feedback"></p>
-  <button onclick="showScreen('welcome')">Go back</button>
-</section>
-
-<!-- SEVEN PICTURES -->
-<section class="screen" id="gallery">
-  <h1>You got it, Jiggo!</h1>
-  <p>The door is open! 🔓</p>
-  <p>Seven random things that somehow made me think of you. Don't let this get to your head. 🙄</p>
-
-  <div class="gallery">
-
-    <div class="memory-card">
-      <img src="shower _page-0001.jpg" alt="Starry night sky">
-      <h2>01 — The starry sky</h2>
-      <p>This reminds me of you because whenever I look at the sky, I end up thinking about random things… and somehow, you're one of those thoughts. Maybe that's what happens when someone quietly becomes special.</p>
+  <div class="container">
+    <div class="eyebrow">A tiny surprise, just for you</div>
+    <div class="card">
+      <div class="art" aria-hidden="true">
+        <div>🐧</div>
+        <div style="font-size:38px;margin-top:-8px">🌷</div>
+        <span class="door">🚪</span>
+      </div>
+      <h1>Heyyyyy, Jiggo!</h1>
+      <p class="subtitle">
+        Someone has a tiny surprise for you.<br>
+        Do you want to open this door?
+      </p>
+      <button class="primary" onclick="showScreen('quiz')">
+        Let's see what's inside →
+      </button>
     </div>
-
-    <div class="memory-card">
-      <img src="my little star_page-0001.jpg" alt="Little starfish">
-      <h2>02 — The little starfish</h2>
-      <p>Pata nahi kyun, but this little starfish reminds me of you 😭 Maybe because now even the most random things make me go, “Wait, this reminds me of my Jiggo.”</p>
-    </div>
-
-    <div class="memory-card">
-      <img src="ocean _page-0001.jpg" alt="Ocean waves">
-      <h2>03 — The ocean</h2>
-      <p>The ocean feels peaceful to me, and talking to you can feel like that too. Even when we're just talking nonsense, somehow my mind feels a little lighter.</p>
-    </div>
-
-    <div class="memory-card">
-      <img src="ab_page-0001.jpg" alt="Sunset">
-      <h2>04 — The sunset</h2>
-      <p>Sunsets make me think about the people I quietly wish good things for. And obviously, you're one of them… meri 11:11 wishes mein bhi toh tum hote ho.</p>
-    </div>
-
-    <div class="memory-card">
-      <img src="my cute meme _page-0001.jpg" alt="Cute little animal">
-      <h2>05 — This little cutie</h2>
-      <p>It's tiny, cute, and a little silly… kinda like the way you make me smile without even trying 😭 I can't explain it properly, bas it gives me your vibe.</p>
-    </div>
-
-    <div class="memory-card">
-      <img src="sunflower _page-0001.jpg" alt="Sunflower">
-      <h2>06 — The sunflower</h2>
-      <p>This reminds me of the way I wish life treats you. I hope you always find a little sunshine, even on your rough days, and never forget how much good you deserve. 🌻</p>
-    </div>
-
-    <div class="memory-card">
-      <img src="beast boy _page-0001.jpg" alt="Beast Boy">
-      <h2>07 — Beast Boy energy</h2>
-      <p>I genuinely have no logical explanation for this one 😭 I saw it and thought of you, so now you'll have to accept that this is your official cartoon energy. Don't argue with me. 🙄</p>
-    </div>
-
   </div>
-
-  <p>Okay, enough embarrassing you for now. There's one more thing.</p>
-  <button onclick="showScreen('sorry')">One last thing →</button>
 </section>
 
-
-<!-- FULL MESSAGE -->
-<section class="screen" id="sorry">
-  <h1>Okay, Jiggo. Read this properly. 🙄</h1>
-
-  <p>
-    Heyyy, my Jiggo!
-  </p>
-
-  <p>
-    Pata nahi main tumhe ye sab directly kabhi bol paungi ya nahi,
-    isliye socha yahan likh deti hoon. And before you start smiling
-    like an idiot, haan, ye sab tumhare liye hi hai. Don't get too
-    excited, okay? 😭
-  </p>
-
-  <p>
-    Honestly, mujhe nahi pata exactly kab tum mere liye itne
-    important ban gaye. Koi particular moment yaad nahi hai.
-    Maybe it was our random conversations, hamari stupid si baatein,
-    ek dusre ko irritate karna, flirting karna, aur phir act karna
-    jaise kuch hua hi nahi.
-  </p>
-
-  <p>
-    Maybe talking to you slowly became something I started looking
-    forward to. Ab kabhi-kabhi main khud sochti hoon, bhai, ye kab
-    hua? 😭
-  </p>
-
-  <p>
-    I do have a little crush on you, obviously. But please apne
-    dimaag mein koi movie mat chala lena. 🙄 I'm not trying to make
-    this into some dramatic love story. I just know that you're
-    important to me, I care about you, and I genuinely enjoy
-    talking to you.
-  </p>
-
-  <p>
-    Tumhare saath random si baatein bhi interesting lagti hain.
-    Kabhi-kabhi kisi particular topic ki bhi zarurat nahi hoti.
-    Bas baat karna achha lagta hai.
-  </p>
-
-  <p>
-    And honestly, one thing I appreciate about you is how you notice
-    little things about me. Kabhi meri baaton mein, kabhi mere
-    reactions mein, kabhi aisi cheezon mein jo main khud bhi notice
-    nahi karti.
-  </p>
-
-  <p>
-    Har koi tumse baat kar sakta hai, but not everyone actually
-    pays attention. And I think it's really nice when someone
-    notices those little things without you having to explain
-    everything. Maybe tumhare liye ye normal hai, but I do
-    appreciate it.
-  </p>
-
-  <p>
-    Aur haan, tum meri 11:11 wishes mein bhi aate ho. 😭
-    Haan, has lo. But seriously, I genuinely wish good things for
-    you. I hope you're happy, your dreams come true, life treats
-    you kindly, and you always find reasons to smile, even on
-    difficult days.
-  </p>
-
-  <p>
-    Main ye sab isliye nahi bol rahi ki tumhe kuch return mein
-    bolna pade. I just want good things for you because you matter
-    to me. Bas itna hi.
-  </p>
-
-  <h2 style="color:#ffcfac">And now, the serious part.</h2>
-
-  <p>
-    Jiggo, I'm genuinely sorry for blocking you yesterday.
-    I could've handled things differently instead of suddenly
-    doing that.
-  </p>
-
-  <p>
-    I don't know exactly how you felt, but I don't want my actions
-    to make you think that you don't matter to me. Because you do.
-    You're important to me, and I really didn't want to hurt you.
-  </p>
-
-  <p>
-    I'm not making excuses for what I did. I should've communicated
-    better, and I'm sorry if I made you feel unwanted or confused.
-    You didn't deserve to be left wondering what happened.
-  </p>
-
-  <p>
-    I know saying sorry won't automatically make everything normal,
-    and I'm not expecting you to forget it immediately. I just
-    wanted to apologise properly and let you know that I'll try
-    to communicate better next time instead of reacting like that.
-  </p>
-
-  <p>
-    I can't change what happened yesterday, but I can learn from
-    it. And I genuinely don't want to repeat that mistake.
-  </p>
-
-  <p>
-    You're not just someone I flirt with. You're someone I enjoy
-    talking to, someone I appreciate, and someone whose happiness
-    I genuinely wish for. There's a difference.
-  </p>
-
-  <p>
-    I'm glad we got to know each other. I'm glad we have our
-    random conversations, our stupid jokes, and all the little
-    moments that probably wouldn't make sense to anyone else. 😭
-  </p>
-
-  <p>
-    I don't know what place I have in your life, and I'm not
-    expecting you to give me some big emotional answer after
-    reading this. I just wanted you to know that I appreciate
-    having you around.
-  </p>
-
-  <p>
-    And don't think this means you're allowed to become even
-    more annoying. You're already doing an excellent job at that.
-    🙄
-  </p>
-
-  <p>
-    So, my Jiggo, I'm sorry for yesterday. Dil se.
-    I hope we can make more silly, happy memories and that I can
-    show you through my actions that I mean what I'm saying.
-  </p>
-
-  <p>
-    Take care of yourself, okay? Khush rehna, apne dreams ke peeche
-    jaana, and don't forget to look after yourself too.
-  </p>
-
-  <h2 style="color:#ffcfac">
-    Happy 11:11, Jiggo. ✨
-  </h2>
-
-  <p>
-    Here's to good things for you, more random conversations,
-    and me continuing to bully you whenever you deserve it.
-    Which, let's be honest, will probably be quite often. 😭
-  </p>
-
-  <button onclick="showScreen('ending')">
-    Okay, enough emotions now →
-  </button>
+<section class="screen" id="quiz">
+  <div class="container">
+    <div class="eyebrow">Before you enter...</div>
+    <div class="card">
+      <h2>One little question</h2>
+      <p class="question">Which outfit did I wear?</p>
+      <div class="options">
+        <button class="option" onclick="checkAnswer('A')">A) Black outfit</button>
+        <button class="option" onclick="checkAnswer('B')">B) Pink outfit</button>
+        <button class="option" onclick="checkAnswer('C')">C) Brown kurti</button>
+        <button class="option" onclick="checkAnswer('D')">D) Blue outfit</button>
+      </div>
+      <p id="quizFeedback" aria-live="polite"></p>
+    </div>
+  </div>
 </section>
-  
-<!-- FINAL SCREEN -->
+
+<section class="screen" id="crore">
+  <div class="container">
+    <div class="card">
+      <div class="eyebrow">Computer ji, lock kiya jaye!</div>
+      <h1>SAHI JAWAAAB!</h1>
+      <div class="big-number">7 CRORE!!!</div>
+      <p class="subtitle">
+        Bahut bahut badhai ho, Jiggo ji!<br>
+        Aap jeet chuke hain poore saat crore rupaye.
+      </p>
+      <p>Prize claim karne ke liye neeche click karein.</p>
+      <button class="primary" onclick="showScreen('gallery')">
+        Claim my 7 crore →
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="screen" id="gallery">
+  <div class="gallery-container">
+    <div class="gallery-intro">
+      <h1>I WISH I COULD UPLOAD YOUR PICTURE...</h1>
+      <p>But I don't have any, so I'm uploading pictures which remind me of you instead.</p>
+      <span>A little collection of things that make me think of you.</span>
+    </div>
+
+    <div class="gallery">
+      <article class="memory-card">
+        <img src="shower%20_page-0001.jpg" alt="Starry sky" loading="lazy">
+        <div class="memory-content">
+          <h3>The sky</h3>
+          <p>This reminds me of you because whenever I look at the sky, I end up thinking about random things… and somehow, you're one of those thoughts. Maybe that's what happens when someone quietly becomes special.</p>
+        </div>
+      </article>
+
+      <article class="memory-card">
+        <img src="my%20little%20star_page-0001.jpg" alt="Little starfish" loading="lazy">
+        <div class="memory-content">
+          <h3>My little star</h3>
+          <p>Pata nahi kyun, but this little starfish reminds me of you. Maybe because now even the most random things make me go, "Wait, this reminds me of my Jiggo."</p>
+        </div>
+      </article>
+
+      <article class="memory-card">
+        <img src="ocean%20_page-0001.jpg" alt="Ocean waves" loading="lazy">
+        <div class="memory-content">
+          <h3>The ocean</h3>
+          <p>The ocean feels peaceful to me, and talking to you can feel like that too. Even when we're just talking nonsense, somehow my mind feels a little lighter.</p>
+        </div>
+      </article>
+
+      <article class="memory-card">
+        <img src="amitabh.jpg" alt="Amitabh Bachchan" loading="lazy">
+        <div class="memory-content">
+          <h3>LOCK KIYA JAYE?</h3>
+          <p>BROOO, WHY DO YOU ACT LIKE AMITABH BACHCHAN SOMETIMES?
+
+The attitude, the confidence, the way you carry yourself like you're hosting Kaun Banega Crorepati. Sir, nobody asked you to announce the final answer. You're literally one "LOCK KIYA JAYE?" away from becoming him.
+
+And the funniest part? I can actually imagine you saying it with a straight face. PLEASE, JIGGO, COME BACK TO REALITY.</p>
+        </div>
+      </article>
+
+      <article class="memory-card">
+        <img src="my%20cute%20meme%20_page-0001.jpg" alt="Cute animal meme" loading="lazy">
+        <div class="memory-content">
+          <h3>That's so you</h3>
+          <p>This is literally you whenever I flirt with you. Just sitting there all confused, not knowing what to say or how to react. I swear, this is exactly how I imagine you in my head, and now I can't unsee it.</p>
+        </div>
+      </article>
+
+      <article class="memory-card">
+        <img src="sunflower%20_page-0001.jpg" alt="Sunflower" loading="lazy">
+        <div class="memory-content">
+          <h3>Sunflower energy</h3>
+          <p>I've always loved sunflowers, and somehow, you have that same energy. I can't explain it properly, but there's something about your vibe that reminds me of them. Maybe my brain just likes connecting random things I love to you.</p>
+        </div>
+      </article>
+
+      <article class="memory-card">
+        <img src="beast%20boy%20_page-0001.jpg" alt="Beast Boy" loading="lazy">
+        <div class="memory-content">
+          <h3>Your cartoon energy</h3>
+          <p>I genuinely have no logical explanation for this one. I saw it and thought of you, so now you'll have to accept that this is your official cartoon energy. Don't argue with me.</p>
+        </div>
+      </article>
+    </div>
+
+    <div style="text-align:center;margin:32px 0">
+      <button class="primary" onclick="showScreen('letter1')">
+        There's one more thing →
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="screen" id="letter1">
+  <div class="letter-container">
+    <div class="letter-card">
+      <p class="eyebrow">A LITTLE LETTER · 1 OF 2</p>
+      <h1>Hey, my Jiggo.</h1>
+
+      <div class="letter-text">
+        <p>I don't really know when you became someone special to me. It wasn't one big moment or something dramatic. It was probably all the random conversations, the stupid jokes, the flirting, and the little things that slowly started meaning more to me than I expected.</p>
+
+        <p>Somewhere between all our nonsense and our random talks, you became someone I genuinely look forward to talking to. Someone who can make an ordinary day feel a little less ordinary without even trying.</p>
+
+        <p>I started noticing how little things reminded me of you. Sometimes it's something completely random, and my first thought is that I need to tell you about it. You just somehow became part of the random thoughts that cross my mind.</p>
+
+        <p>And yes, I have a little crush on you. Maybe a little more than I originally planned to have. I like flirting with you, teasing you, talking to you, and watching you get confused when I say something unexpected.</p>
+
+        <p>But underneath all the flirting and bakwaas, I genuinely care about you. You're becoming someone I'm comfortable talking to, someone whose presence I enjoy, and someone I want to know better.</p>
+
+        <p>Sometimes I make little wishes at 11:11, and sometimes you're part of those wishes. I don't say that to put any pressure on you. It's just one of those small things that makes me smile.</p>
+
+        <p>One thing I appreciate about you is that you notice little things. Maybe they seem ordinary to you, but being noticed can mean a lot to someone. I appreciate the moments when you make me feel heard, remembered, or simply included.</p>
+      </div>
+
+      <div class="letter-buttons">
+        <button class="secondary" onclick="showScreen('gallery')">← Back to pictures</button>
+        <button class="primary" onclick="showScreen('letter2')">Keep reading →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="screen" id="letter2">
+  <div class="letter-container">
+    <div class="letter-card">
+      <p class="eyebrow">A LITTLE LETTER · 2 OF 2</p>
+      <h1>One more thing...</h1>
+
+      <div class="letter-text">
+        <p>I also want to say I'm sorry for blocking you yesterday. I know that wasn't the best way to handle things, and I don't want to pretend that it was okay just because I might have been upset or confused in the moment.</p>
+
+        <p>I should have communicated instead of reacting that way. You didn't deserve to be left guessing, and I could have handled the situation more maturely. I'm not saying this to make excuses. I genuinely wanted to acknowledge it because I don't want a small moment to hurt our conversations.</p>
+
+        <p>I'll try to communicate better instead of making decisions in the heat of the moment. I'm still learning, and I won't always get everything right, but I can at least be honest when I realise I've handled something badly.</p>
+
+        <p>I don't know exactly what this feeling is supposed to be called. Maybe it's a crush that became a little more meaningful than I expected. Maybe you're simply someone I really enjoy having in my life. I don't need to force a label on it right now to know that I value it.</p>
+
+        <p>And I want you to know that there's no pressure on you to feel the same way or to give me a particular answer. I just wanted to be honest about how I feel and let you know that you matter to me.</p>
+
+        <p>I'm genuinely happy that we met. I'm glad that we got to talk, joke around, and become familiar with each other. Even the little conversations have become memories that I like looking back on.</p>
+
+        <p>I like having you around, idiot, so don't make me regret admitting it. And please don't let this make things weird between us. I still want our random conversations, our teasing, our nonsense, and all the little moments that make talking to you fun.</p>
+
+        <p>I don't know what happens next, and that's okay. For now, I just wanted you to know that someone made this little corner of the internet thinking about you. And yes, you should feel special about that. I don't make websites for absolutely everybody.</p>
+      </div>
+
+      <div class="letter-buttons">
+        <button class="secondary" onclick="showScreen('letter1')">← Previous page</button>
+        <button class="primary" onclick="showScreen('ending')">One last thing →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="screen" id="ending">
-  <p>✦　˚　✧　⋆　✦　˚　✧</p>
-  <h1>That's all, Jiggo!</h1>
-
-  <div class="penguin">🐧🌼</div>
-
-  <p>You're annoying, sometimes impossible to understand, and unfortunately quite fun to talk to. Don't let this website inflate your ego. 🙄</p>
-
-  <p>Take care of yourself, okay? I hope life is kind to you and gives you plenty of reasons to smile.</p>
-
-  <h2 style="color:#ffcfac">— Your little crush, maybe. 👀</h2>
-
-  <p class="small">Made with a little effort and a lot of overthinking.</p>
-
-  <button onclick="showScreen('welcome')">Read it again ↺</button>
+  <div class="ending-container">
+    <p class="eyebrow">End of your little surprise</p>
+    <h1>That's all, Jiggo.</h1>
+    <p>No grand conclusion, no dramatic final answer. Just a little surprise made with you in mind.</p>
+    <p>Now go back to being your usual dramatic self.</p>
+    <button class="primary" onclick="showScreen('welcome')">Start again ↻</button>
+  </div>
 </section>
 
 <script>
-function showScreen(screenId) {
+function showScreen(id) {
   document.querySelectorAll('.screen').forEach(function(screen) {
     screen.classList.remove('active');
   });
 
-  document.getElementById(screenId).classList.add('active');
-  window.scrollTo(0, 0);
+  const next = document.getElementById(id);
+
+  if (next) {
+    next.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    const text = next.querySelector('.letter-text');
+    if (text) text.scrollTop = 0;
+  }
 }
 
+let answerLocked = false;
+
 function checkAnswer(answer) {
+  const feedback = document.getElementById('quizFeedback');
+
   if (answer === 'C') {
-    document.getElementById('feedback').textContent = '';
-    showScreen('gallery');
+    if (answerLocked) return;
+
+    answerLocked = true;
+    feedback.textContent = 'FINAL ANSWER LOCKED!';
+
+    document.querySelectorAll('.option').forEach(function(button) {
+      button.disabled = true;
+    });
+
+    setTimeout(function() {
+      showScreen('crore');
+      answerLocked = false;
+
+      document.querySelectorAll('.option').forEach(function(button) {
+        button.disabled = false;
+      });
+    }, 700);
   } else {
-    document.getElementById('feedback').textContent =
-      'Wrong answer, Jiggo! 😭 Try again!';
+    feedback.textContent = 'Galat jawab, Jiggo ji! Try again.';
   }
 }
 </script>
 
 </body>
-  </html>
-  
+</html>
+
